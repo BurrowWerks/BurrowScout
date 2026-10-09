@@ -1,5 +1,5 @@
 from pathlib import Path
-from sites import parse_content
+from i_work_for_sa import parse_content
 
 def test_parse_content_returns_expected_jobs():
     fixture_path = Path(__file__).parent/ "fixtures" / "i_work_for_sa.html"
