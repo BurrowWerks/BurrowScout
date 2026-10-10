@@ -2,24 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 from urllib.parse import urlparse
-import json
-from pathlib import Path
-from datetime import datetime, timezone
-import uuid
 import time
-
-sites = {
-    "i_work_for_sa": {
-        "base_url": "https://www.iworkfor.sa.gov.au",
-        "job_search_url": "https://www.iworkfor.sa.gov.au/jb/page/page.php?pageID=842&windowUID=0",
-        "category_id": 40480,
-    }
-}
-
-MAX_RESPONSE_SIZE = 5242880
-MIN_REQUEST_INTERVAL = 2
-USER_AGENT = {"User-Agent": "BurrowScout/0.1.0 (Python; wage-data research)"}
-REQUEST_TIMEOUT = (5, 30)
+from config import sites, MAX_RESPONSE_SIZE, MIN_REQUEST_INTERVAL, REQUEST_TIMEOUT, USER_AGENT
 
 def fetch_job_listings_html():
     with requests.Session() as session:
@@ -27,7 +11,7 @@ def fetch_job_listings_html():
         start_time = time.monotonic()
         initial_response = session.get(sites["i_work_for_sa"]["job_search_url"],
                                         timeout=REQUEST_TIMEOUT, allow_redirects=False)
-                                         #Later Stream=True needs to be implemented as well as a new limiting operation
+                                        #Later Stream=True needs to be implemented as well as a new limiting operation
         initial_redirect_url = validate_url_redirect(initial_response)
         
         wait_for_request_interval(start_time)
@@ -59,47 +43,44 @@ def fetch_job_listings_html():
         return results_response.content
 
 def validate_html_response(response):
-        content_type = response.headers.get("Content-Type")
-        cleaned_content_type = content_type.split(";")[0].strip().lower() if content_type else ""
-        if response.status_code != 200:
-            raise ValueError(f"HTML response returned unexpected status. Status code: {response.status_code}")
-        if len(response.content) > MAX_RESPONSE_SIZE:
-            raise ValueError (f"{len(response.content)} exceeds max limit.")
-        if cleaned_content_type != "text/html":
-            raise ValueError(f"Unexpected content type: {cleaned_content_type}")
+    content_type = response.headers.get("Content-Type")
+    cleaned_content_type = content_type.split(";")[0].strip().lower() if content_type else ""
+    if response.status_code != 200:
+        raise ValueError(f"HTML response returned unexpected status. Status code: {response.status_code}")
+    if len(response.content) > MAX_RESPONSE_SIZE:
+        raise ValueError (f"{len(response.content)} exceeds max limit.")
+    if cleaned_content_type != "text/html":
+        raise ValueError(f"Unexpected content type: {cleaned_content_type}")
 
 def extract_jobboard_token(response):
-        soup = BeautifulSoup(response.content, "html.parser")
-        jobtoken = soup.find("input", attrs={"name": "jobboard_token"})
-        jobtoken_value = jobtoken["value"] if jobtoken else None
-        
-        if jobtoken_value is None:
-            raise ValueError("Job token not found.")
-        return jobtoken_value
+    soup = BeautifulSoup(response.content, "html.parser")
+    jobtoken = soup.find("input", attrs={"name": "jobboard_token"})
+    jobtoken_value = jobtoken["value"] if jobtoken else None        
+    if jobtoken_value is None:
+        raise ValueError("Job token not found.")
+    return jobtoken_value
 
 def wait_for_request_interval(start_time):
-        elapsed_time = (time.monotonic() - start_time)
-        if elapsed_time < MIN_REQUEST_INTERVAL:
-            time.sleep(MIN_REQUEST_INTERVAL - elapsed_time)
+    elapsed_time = (time.monotonic() - start_time)
+    if elapsed_time < MIN_REQUEST_INTERVAL:
+        time.sleep(MIN_REQUEST_INTERVAL - elapsed_time)
 
 def validate_url_redirect(response):
-        if response.status_code != 302:
-            raise ValueError(f"Expected redirect response, received status code: {response.status_code}")    
-        location_header = response.headers.get("Location")
-        if location_header is None:
-            raise ValueError("Redirect response did not contain a Location header.")
-        
-        make_absolute = urljoin(sites["i_work_for_sa"]["base_url"], location_header)
-        approved_hostname = urlparse(sites["i_work_for_sa"]["base_url"]).hostname
-        parsed_url_redirect = urlparse(make_absolute)
-        
-        if parsed_url_redirect.scheme != "https":
-            raise ValueError("Redirect used an unapproved scheme")
-        if parsed_url_redirect.hostname != approved_hostname:
-            raise ValueError("Redirect used an unapproved hostname")
-        if not parsed_url_redirect.path.startswith("/jb/page/"):
-            raise ValueError("Redirect used an unapproved path")
-        return make_absolute
+    if response.status_code != 302:
+        raise ValueError(f"Expected redirect response, received status code: {response.status_code}")    
+    location_header = response.headers.get("Location")
+    if location_header is None:
+        raise ValueError("Redirect response did not contain a Location header.")
+    make_absolute = urljoin(sites["i_work_for_sa"]["base_url"], location_header)
+    approved_hostname = urlparse(sites["i_work_for_sa"]["base_url"]).hostname
+    parsed_url_redirect = urlparse(make_absolute)
+    if parsed_url_redirect.scheme != "https":
+        raise ValueError("Redirect used an unapproved scheme")
+    if parsed_url_redirect.hostname != approved_hostname:
+        raise ValueError("Redirect used an unapproved hostname")
+    if not parsed_url_redirect.path.startswith("/jb/page/"):
+        raise ValueError("Redirect used an unapproved path")
+    return make_absolute
     
 def parse_content(html_content):     
     new_soup = BeautifulSoup(html_content, "html.parser")
@@ -142,46 +123,3 @@ def parse_content(html_content):
         jobs.append(job)
     return jobs
 
-def create_run_uuid():
-    job_run_id = uuid.uuid4()
-    return str(job_run_id)
-
-def create_run_metadata(jobs, job_run_id):
-    metadata = {
-        "source": 'i_work_for_sa',
-        "source_url": sites['i_work_for_sa']['job_search_url'],
-        "observed_at_utc": datetime.now(timezone.utc).isoformat(),
-        "record_count": len(jobs),
-        "run_id": job_run_id
-    }
-    return metadata
-    
-def create_output_directory():
-    output_dir = Path("data") / "i_work_for_sa"
-    output_dir.mkdir(parents=True, exist_ok=True)
-    return output_dir 
-
-def create_new_dict_with_metadata(jobs, metadata):
-    output = {
-        "metadata": metadata,
-        "jobs": jobs
-    }
-    return output
-
-def save_output_to_file(output, run_timestamp, job_run_id):
-    output_dir = create_output_directory()
-    output_file = output_dir / f"jobs_{job_run_id}_{run_timestamp}.json"
-    with open(output_file, "x", encoding="utf-8") as f:
-        json.dump(output, f, indent=4)
-
-def main():  # Call the main function to execute the script
-    html_content = fetch_job_listings_html()
-    jobs = parse_content(html_content=html_content)
-    run_timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    job_run_uuid = create_run_uuid()
-    metadata = create_run_metadata(jobs, job_run_uuid)
-    jobs_dict = create_new_dict_with_metadata(jobs, metadata)
-    save_output_to_file(jobs_dict, run_timestamp, job_run_uuid)
-
-if __name__ == "__main__":
-    main()
