@@ -1,0 +1,178 @@
+## Optional-field fixture verification
+
+The supplied synthetic fixture containing missing optional fields was parsed successfully.
+
+Verified behaviour:
+
+- missing closing date → `None`
+- missing agency → `None`
+- missing job link → `None`
+- missing anchor element does not cause parsing failure
+
+Result: PASS
+
+{
+    "metadata": {
+        "source": "i_work_for_sa",
+        "source_url": "https://www.iworkfor.sa.gov.au/jb/page/page.php?pageID=842&windowUID=0",
+        "observed_at_utc": "2026-10-11T03:40:22.483838+00:00",
+        "record_count": 14,
+        "run_id": "f0178939-d4f7-4dc8-8999-9f8fbd451ea7"
+    },
+    "jobs": [
+        {
+            "job_title": "Aboriginal Employment Pool",
+            "job_reference_number": "825882",
+            "job_posting_date": "17/12/2024",
+            "job_closing_date": "30/11/2026",
+            "job_agency": "SA Health",
+            "job_classification": "ASO1 - Administrative Services Officer",
+            "job_salary": "Negotiable",
+            "job_location": "- VARIOUS -",
+            "job_link": "https://www.iworkfor.sa.gov.au/jb/page/R3NuWElRaFJzK1VZWGRtbk9TOHhFUS9idm5Od2drdnVLbkZaajNSSTZPZ3RHaTBCNUpzQVFiSXNEUVY3SVFWdHRqTEFHMGNnYUxwcm1aVjlmUjIwbFE9PQ"
+        },
+        {
+            "job_title": "ASO3 Taxation Officer",
+            "job_reference_number": "860179",
+            "job_posting_date": "08/10/2026",
+            "job_closing_date": "21/10/2026",
+            "job_agency": "Department of Treasury and Finance",
+            "job_classification": "ASO3 - Administrative Services Officer",
+            "job_salary": "$70k - $89k",
+            "job_location": "5000 - ADELAIDE",
+            "job_link": "https://www.iworkfor.sa.gov.au/jb/page/R3NuWElRaFJzK1VZWGRtbk9TOHhFUS9idm5Od2drdnVLbkZaajNSSTZPZzhxOVNsNDZCN2hveENJb0E0Ylg2TnRqTEFHMGNnYUxwcm1aVjlmUjIwbFE9PQ"
+        },
+        {
+            "job_title": "ASO6 Senior Taxation and Capital Accountant",
+            "job_reference_number": "858919",
+            "job_posting_date": "24/09/2026",
+            "job_closing_date": "14/10/2026",
+            "job_agency": "South Australian Housing Trust",
+            "job_classification": "ASO6 - Administrative Services Officer",
+            "job_salary": "$90k - $109k, $110k - $149k",
+            "job_location": "5000 - ADELAIDE",
+            "job_link": "https://www.iworkfor.sa.gov.au/jb/page/R3NuWElRaFJzK1VZWGRtbk9TOHhFUS9idm5Od2drdnVLbkZaajNSSTZPaE83d3RrZlpaOTJYeXpYUlA3VE9XL3RqTEFHMGNnYUxwcm1aVjlmUjIwbFE9PQ"
+        },
+        {
+            "job_title": "Business Consultant",
+            "job_reference_number": "952110",
+            "job_posting_date": "02/10/2026",
+            "job_closing_date": "16/10/2026",
+            "job_agency": "SA Health",
+            "job_classification": "ASO6 - Administrative Services Officer",
+            "job_salary": "$110k - $149k",
+            "job_location": "5112 - ELIZABETH VALE",
+            "job_link": "https://www.iworkfor.sa.gov.au/jb/page/R3NuWElRaFJzK1VZWGRtbk9TOHhFUS9idm5Od2drdnVLbkZaajNSSTZPaVVrL0xPd2hHZGR6aGQzQVI2SUNMUHRqTEFHMGNnYUxwcm1aVjlmUjIwbFE9PQ"
+        },
+        {
+            "job_title": "Business Process Analyst/Technical Writer",
+            "job_reference_number": "859545",
+            "job_posting_date": "29/09/2026",
+            "job_closing_date": "13/10/2026",
+            "job_agency": "Department of Treasury and Finance",
+            "job_classification": "ASO5 - Administrative Services Officer",
+            "job_salary": "$90k - $109k",
+            "job_location": "5000 - ADELAIDE",
+            "job_link": "https://www.iworkfor.sa.gov.au/jb/page/R3NuWElRaFJzK1VZWGRtbk9TOHhFUS9idm5Od2drdnVLbkZaajNSSTZPZ2s1ajdIVVY0S3VXZndIVXVMMlk5d3RqTEFHMGNnYUxwcm1aVjlmUjIwbFE9PQ"
+        },
+        {
+            "job_title": "Corporate Management Accountant",
+            "job_reference_number": "req466",
+            "job_posting_date": "02/10/2026",
+            "job_closing_date": "16/10/2026",
+            "job_agency": "Renewal SA",
+            "job_classification": "ASO5 - Administrative Services Officer",
+            "job_salary": "$90k - $109k",
+            "job_location": "5001 - ADELAIDE",
+            "job_link": "https://www.iworkfor.sa.gov.au/jb/page/R3NuWElRaFJzK1VZWGRtbk9TOHhFUS9idm5Od2drdnVLbkZaajNSSTZPam5Dc1FETGllc0daNkUyWE1ZQmNJbnRqTEFHMGNnYUxwcm1aVjlmUjIwbFE9PQ"
+        },
+        {
+            "job_title": "Deputy Audit Manager (Financial Audit)",
+            "job_reference_number": "859432",
+            "job_posting_date": "01/10/2026",
+            "job_closing_date": "16/10/2026",
+            "job_agency": "Audit Office of South Australia",
+            "job_classification": "ASO5 - Administrative Services Officer",
+            "job_salary": "$70k - $89k, $90k - $109k",
+            "job_location": "5000 - ADELAIDE",
+            "job_link": "https://www.iworkfor.sa.gov.au/jb/page/R3NuWElRaFJzK1VZWGRtbk9TOHhFUS9idm5Od2drdnVLbkZaajNSSTZPZ1Z4MjhPaWhKNURoUGhKeHUzWk9INXRqTEFHMGNnYUxwcm1aVjlmUjIwbFE9PQ"
+        },
+        {
+            "job_title": "Finance Manager",
+            "job_reference_number": "860424",
+            "job_posting_date": "08/10/2026",
+            "job_closing_date": "28/10/2026",
+            "job_agency": "Country Arts SA",
+            "job_classification": "ASO6 - Administrative Services Officer",
+            "job_salary": "$90k - $109k, $110k - $149k",
+            "job_location": "5081 - COLLINSWOOD",
+            "job_link": "https://www.iworkfor.sa.gov.au/jb/page/R3NuWElRaFJzK1VZWGRtbk9TOHhFUS9idm5Od2drdnVLbkZaajNSSTZPajlON1RWc0ZLR2ZhdzV2MitLZXNwVnRqTEFHMGNnYUxwcm1aVjlmUjIwbFE9PQ"
+        },
+        {
+            "job_title": "MANAGER CORPORATE ACCOUNTING",
+            "job_reference_number": "859874",
+            "job_posting_date": "01/10/2026",
+            "job_closing_date": "14/10/2026",
+            "job_agency": "TAFE SA",
+            "job_classification": "ASO8 - Administrative Services Officer",
+            "job_salary": "$110k - $149k",
+            "job_location": "5000 - ADELAIDE",
+            "job_link": "https://www.iworkfor.sa.gov.au/jb/page/R3NuWElRaFJzK1VZWGRtbk9TOHhFUS9idm5Od2drdnVLbkZaajNSSTZPaVM5VWRpL05KdXppSG9aVHZnd0VUZXRqTEFHMGNnYUxwcm1aVjlmUjIwbFE9PQ"
+        },
+        {
+            "job_title": "Oracle Cloud Infrastructure/Oracle Integration Cloud (OCI/OIC) Enterprise Architect",
+            "job_reference_number": "860499",
+            "job_posting_date": "08/10/2026",
+            "job_closing_date": "22/10/2026",
+            "job_agency": "Department of Treasury and Finance",
+            "job_classification": "ASO8 - Administrative Services Officer",
+            "job_salary": "$110k - $149k",
+            "job_location": "5000 - ADELAIDE",
+            "job_link": "https://www.iworkfor.sa.gov.au/jb/page/R3NuWElRaFJzK1VZWGRtbk9TOHhFUS9idm5Od2drdnVLbkZaajNSSTZPaHlGNUhCZzZLVmt5T3N6a3poU2Evd3RqTEFHMGNnYUxwcm1aVjlmUjIwbFE9PQ"
+        },
+        {
+            "job_title": "Project Finance Analyst",
+            "job_reference_number": "req449",
+            "job_posting_date": "02/10/2026",
+            "job_closing_date": "16/10/2026",
+            "job_agency": "Renewal SA",
+            "job_classification": "ASO4 - Administrative Services Officer",
+            "job_salary": "$90k - $109k",
+            "job_location": "5001 - ADELAIDE",
+            "job_link": "https://www.iworkfor.sa.gov.au/jb/page/R3NuWElRaFJzK1VZWGRtbk9TOHhFUS9idm5Od2drdnVLbkZaajNSSTZPaUNMZ0J1SWZqbGFXT205dkg0cmg3MnRqTEFHMGNnYUxwcm1aVjlmUjIwbFE9PQ"
+        },
+        {
+            "job_title": "Senior Auditor (Financial Audit)",
+            "job_reference_number": "859689",
+            "job_posting_date": "01/10/2026",
+            "job_closing_date": "16/10/2026",
+            "job_agency": "Audit Office of South Australia",
+            "job_classification": "ASO4 - Administrative Services Officer",
+            "job_salary": "$70k - $89k",
+            "job_location": "5000 - ADELAIDE",
+            "job_link": "https://www.iworkfor.sa.gov.au/jb/page/R3NuWElRaFJzK1VZWGRtbk9TOHhFUS9idm5Od2drdnVLbkZaajNSSTZPaVdiUzI3WXBac3lEOGxnTURaUmxCWXRqTEFHMGNnYUxwcm1aVjlmUjIwbFE9PQ"
+        },
+        {
+            "job_title": "Senior Revenue Officer - Debt Management",
+            "job_reference_number": "943787",
+            "job_posting_date": "21/09/2026",
+            "job_closing_date": "19/10/2026",
+            "job_agency": "SA Health",
+            "job_classification": "ASO3 - Administrative Services Officer",
+            "job_salary": "$70k - $89k",
+            "job_location": "5540 - PORT PIRIE",
+            "job_link": "https://www.iworkfor.sa.gov.au/jb/page/R3NuWElRaFJzK1VZWGRtbk9TOHhFUS9idm5Od2drdnVLbkZaajNSSTZPaDVJTDBRY0cxN04wU1d6aGN3SmVzZHRqTEFHMGNnYUxwcm1aVjlmUjIwbFE9PQ"
+        },
+        {
+            "job_title": "Senior Technical Advisor",
+            "job_reference_number": "860488",
+            "job_posting_date": "08/10/2026",
+            "job_closing_date": "18/10/2026",
+            "job_agency": "Department of Treasury and Finance",
+            "job_classification": "ASO7 - Administrative Services Officer",
+            "job_salary": "$110k - $149k",
+            "job_location": "5000 - ADELAIDE",
+            "job_link": "https://www.iworkfor.sa.gov.au/jb/page/R3NuWElRaFJzK1VZWGRtbk9TOHhFUS9idm5Od2drdnVLbkZaajNSSTZPaU40a1pOSmVnUFd2cGVaVEFxbmpYdnRqTEFHMGNnYUxwcm1aVjlmUjIwbFE9PQ"
+        }
+    ]
+}

@@ -78,17 +78,32 @@ Example structure:
         "source": "i_work_for_sa",
         "source_url": "https://www.iworkfor.sa.gov.au/...",
         "observed_at_utc": "2026-10-08T20:21:41+00:00",
-        "record_count": 15
+        "record_count": 0,
+        "run_id": "22a87327-a98f-4295-ac14-e80380fafb23"
     },
     "jobs": []
 }
+```
+
+### Example Output
+
+A representative output file from a successful I WORK FOR SA collection run is available at:
+
+`examples/i_work_for_sa_sample.json`
+
+The sample preserves source-provided salary wording and demonstrates the JSON structure produced by BurrowScout 0.1.0.
 
 ## Requirements
 
-- Python 3.11+
+Runtime:
+- Python 3.12+
 - requests
 - beautifulsoup4
+
+Development/testing:
 - pytest
+
+BurrowScout 0.1.0 has been tested with Python 3.14.4 on WSL/Linux.
 
 
 ## Installation

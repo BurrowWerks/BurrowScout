@@ -14,13 +14,16 @@ category `40480`.
 
 ## Salary Precision
 
-BurrowScout 0.1.0 records the salary representation presented in the
-I WORK FOR SA search-results table.
+Salary values are preserved as presented by the search-results source.
+BurrowScout 0.1.0 does not convert salary text into numeric minimum/maximum
+values or infer missing remuneration.
 
-This may be a broad salary band such as `$70k - $89k` rather than the
-more precise remuneration range shown on the individual job-detail page.
+Values such as `Negotiable` remain valid contextual job data. Multiple salary
+bands are also preserved as source text.
 
-Version 0.1.0 does not follow each listing to retrieve detailed remuneration.
+Future numeric wage datasets or exports will need to distinguish or exclude
+undisclosed-pay records rather than treating them as numerical wage observations.
+
 
 ## No Pagination
 
@@ -37,6 +40,24 @@ Responses larger than 5 MiB are rejected after they have been received.
 
 Because requests are not currently streamed, the complete response is downloaded
 before the size validation occurs.
+
+BurrowScout 0.1.0 intentionally uses a post-download response-size check rather
+than a streamed hard-download limit.
+
+A true streamed download budget is deferred to BurrowScout 0.2.0 reliability
+work. Version 0.1.0 is limited to manual, single-category, single-page runs and
+uses connection/read timeouts, request spacing, bounded redirects, and the
+post-download 5 MiB validation as its current request safeguards.
+
+## No Hard Overall Runtime Limit
+
+BurrowScout 0.1.0 does not enforce a hard whole-run deadline.
+
+Individual network operations are bounded by the configured connection and read
+timeouts, but these are not equivalent to a maximum total run duration.
+
+A hard whole-run runtime budget is deferred to BurrowScout 0.2.0 reliability
+work.
 
 ## No Automatic Retries
 

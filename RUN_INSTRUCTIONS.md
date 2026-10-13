@@ -1,59 +1,93 @@
 # BurrowScout Run Instructions
 
-## Ubuntu / WSL
+BurrowScout 0.1.0 requires Python 3.12 or later.
 
-From the BurrowScout project directory:
+The currently verified development environment is:
+
+- WSL/Linux
+- Python 3.14.4
+- pytest 9.1.1
+
+Run all commands from the BurrowScout project root unless stated otherwise.
+
+## Dependency installation
+
+For the 0.1.0 development/test environment, install dependencies from the
+repository's pinned `requirements.txt` file:
 
 ```bash
-cd /mnt/b/Development/Projects/Learning/Python/BurrowScout
+python -m pip install -r requirements.txt
 ```
 
-Activate the WSL virtual environment:
+`pyproject.toml` declares BurrowScout's direct runtime dependencies. The
+`requirements.txt` file records the tested development environment, including
+pytest and resolved supporting packages.
+
+## Ubuntu / WSL
+
+Open WSL and change to the directory where you cloned or downloaded
+BurrowScout.
+
+For example:
+
+```bash
+cd /path/to/BurrowScout
+```
+
+The path above is only an example. Use the actual path to your local checkout.
+
+### Create the WSL virtual environment
+
+```bash
+python -m venv .venv-wsl
+```
+
+### Activate the WSL virtual environment
 
 ```bash
 source .venv-wsl/bin/activate
 ```
 
-The terminal should display:
+The terminal should now show the active environment, for example:
 
 ```text
 (.venv-wsl)
 ```
 
-## Install Dependencies
+### Install dependencies
 
 ```bash
-python -m pip install requests beautifulsoup4 pytest
+python -m pip install -r requirements.txt
 ```
 
-## Run BurrowScout
+### Run BurrowScout
 
 ```bash
-python sites.py
+python main.py
 ```
 
-A successful run will retrieve the source, validate it, parse records, create
-metadata, and write a JSON output file to:
+A successful run retrieves the configured I WORK FOR SA search results,
+validates the responses, parses job records, creates run metadata, and writes a
+JSON output file under:
 
 ```text
 data/i_work_for_sa/
 ```
 
-## Run Tests
-
-From the project root:
+### Run the test suite
 
 ```bash
 python -m pytest -v
 ```
 
-The current fixture is:
+The test suite uses offline fixtures and controlled fake HTTP responses where
+appropriate. Fixture files are stored under:
 
 ```text
-tests/fixtures/i_work_for_sa.html
+tests/fixtures/
 ```
 
-## Deactivate Environment
+### Deactivate the environment
 
 ```bash
 deactivate
@@ -61,20 +95,70 @@ deactivate
 
 ## Windows PowerShell
 
-Activate:
+Open PowerShell and change to the directory where you cloned or downloaded
+BurrowScout.
+
+For example:
+
+```powershell
+cd C:\path\to\BurrowScout
+```
+
+The path above is only an example. Use the actual path to your local checkout.
+
+### Create the Windows virtual environment
+
+```powershell
+python -m venv .venv
+```
+
+### Activate the Windows virtual environment
 
 ```powershell
 .\.venv\Scripts\Activate.ps1
 ```
 
-Run:
+If PowerShell prevents the activation script from running because of the local
+execution policy, use an appropriate PowerShell execution-policy setting for
+your environment before retrying activation.
+
+### Install dependencies
 
 ```powershell
-python sites.py
+python -m pip install -r requirements.txt
 ```
 
-Tests:
+### Run BurrowScout
+
+```powershell
+python main.py
+```
+
+Output is written under:
+
+```text
+data/i_work_for_sa/
+```
+
+### Run the test suite
 
 ```powershell
 python -m pytest -v
 ```
+
+### Deactivate the environment
+
+```powershell
+deactivate
+```
+
+## Notes
+
+- Windows and WSL use separate virtual environments because they contain
+  platform-specific executables and installed packages.
+- Do not copy or reuse the Windows `.venv` from WSL, or the WSL `.venv-wsl`
+  from Windows.
+- The WSL/Linux environment listed at the top of this document is the
+  currently recorded verified environment for BurrowScout 0.1.0.
+- Run BurrowScout from the project root so relative paths such as
+  `data/i_work_for_sa/` resolve as expected.

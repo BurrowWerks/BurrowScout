@@ -5,18 +5,21 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "burrowscout"
 version = "0.1.0"
-description = "BurrowScout is an open-source Python data collection and processing tool designed to gather publicly available wage, salary, award, and employment-market information from permitted web sources. The project provides a structured pipeline for retrieving source data, extracting relevant employment and remuneration fields, validating and normalising records, removing duplicates, and preserving provenance so that every data point can be traced back to its original source. BurrowScout is being developed incrementally from a single-source web scraper into a modular, multi-source data collection platform with configurable scheduling, logging, error handling, historical run tracking, structured exports, and extensible scraper adapters. Its primary initial use case is collecting wage and pay-rate information relevant to employment in South Australia, with the longer-term goal of supplying reliable structured labour-market data to other BurrowWerks projects such as BurrowForage, while remaining useful as an independent data collection tool. BurrowScout prioritises responsible data collection, transparent source attribution, maintainable architecture, and compliance with source-specific access requirements."
+description = "BurrowScout is an open-source Python tool for collecting permitted public job and wage information from approved sources. Version 0.1.0 implements a bounded I WORK FOR SA scraper that preserves source salary wording, validates responses and extracted records, records provenance metadata, and writes structured JSON output."
 readme = "README.md"
 requires-python = ">=3.12"
 license = "MIT"
 authors = [
     { name = "Richard Martin" }
 ]
-dependencies = []
+dependencies = [
+    "requests>=2.34.2,<3",
+    "beautifulsoup4>=4.15.0,<5"
+]
 
 [project.optional-dependencies]
 dev = [
-    "pytest"
+    "pytest>=9.1.1,<10"
 ]
 
 [tool.pytest.ini_options]
