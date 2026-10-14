@@ -29,7 +29,7 @@ def test_create_run_metadata() -> None:
     assert metadata["source"] == "i_work_for_sa"
     assert metadata["source_url"] == sites["i_work_for_sa"]["job_search_url"]
     assert isinstance(timestamp, str)
-    parsed_timestamp = datetime.fromisoformat(timestamp)
+    parsed_timestamp: datetime = datetime.fromisoformat(timestamp)
     assert parsed_timestamp.utcoffset() == timedelta(0)
 
 def test_save_output_round_trip(tmp_path: Path,monkeypatch: pytest.MonkeyPatch) -> None:
@@ -45,7 +45,7 @@ def test_save_output_round_trip(tmp_path: Path,monkeypatch: pytest.MonkeyPatch) 
 
     save_output_to_file(new_dict, run_timestamp, job_run_id)
 
-    output_file = tmp_path/"data"/"i_work_for_sa"/f"jobs_{job_run_id}_{run_timestamp}.json"
+    output_file: Path = tmp_path/"data"/"i_work_for_sa"/f"jobs_{job_run_id}_{run_timestamp}.json"
     
     
     assert output_file.is_file()
@@ -57,7 +57,7 @@ def test_save_output_round_trip(tmp_path: Path,monkeypatch: pytest.MonkeyPatch) 
 
 def test_save_output_prevents_overwrite(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.chdir(tmp_path)
-    new_dict = {"metadata":
+    new_dict: dict[str, dict[str, str] | list[dict[str, str]]] = {"metadata":
                 {"source": 
                 "i_work_for_sa"},
                 "jobs": [{"job_title": 
@@ -70,11 +70,18 @@ def test_save_output_prevents_overwrite(tmp_path: Path, monkeypatch: pytest.Monk
 
     save_output_to_file(new_dict, run_timestamp, job_run_id)
 
-    output_file = tmp_path/"data"/"i_work_for_sa"/f"jobs_{job_run_id}_{run_timestamp}.json"
+    output_file: Path = tmp_path/"data"/"i_work_for_sa"/f"jobs_{job_run_id}_{run_timestamp}.json"
 
-    output_file_bytes = output_file.read_bytes()
+    output_file_bytes: bytes = output_file.read_bytes()
 
-    with pytest.raises(FileExistsError):
+    with pytest.raises(expected_exception=FileExistsError):
         save_output_to_file(new_dict, run_timestamp, job_run_id)
 
     assert output_file.read_bytes() == output_file_bytes
+
+def test_release_sample_is_valid_json() -> None:
+    sample_path: Path = Path(__file__).parent.parent/"examples"/"i_work_for_sa_sample.json"
+    sample_data = json.loads(sample_path.read_text(encoding="utf-8"))
+
+    assert len(sample_data["jobs"]) == sample_data["metadata"]["record_count"]
+    assert sample_data["metadata"]["record_count"] == 14

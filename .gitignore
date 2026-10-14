@@ -1,47 +1,43 @@
 # Python cache
-
 __pycache__/
 *.py[cod]
 
-# Virtual environments
-
+# Virtual environments (Windows / WSL)
 .venv/
+.venv-wsl/
 venv/
 env/
 
-# Environment variables
-
+# Environment variables / local secrets
 .env
 .env.*
 !.env.example
 
-# Testing
-
+# Tests and coverage artefacts
 .pytest_cache/
 .coverage
 htmlcov/
 
 # Type checking / linting
-
 .mypy_cache/
 .ruff_cache/
 
-# Build files
-
+# Build artefacts
 build/
 dist/
 *.egg-info/
 
-# IDEs
+# Runtime scraped data — NOT curated release examples
+# Keep examples/ and tests/fixtures/ deliberately tracked.
+/data/
 
+# IDEs
 .vscode/
 .idea/
 
 # OS files
-
 .DS_Store
 Thumbs.db
 
 # Logs
-
 *.log

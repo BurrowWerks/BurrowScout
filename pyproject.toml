@@ -7,7 +7,7 @@ name = "burrowscout"
 version = "0.1.0"
 description = "BurrowScout is an open-source Python tool for collecting permitted public job and wage information from approved sources. Version 0.1.0 implements a bounded I WORK FOR SA scraper that preserves source salary wording, validates responses and extracted records, records provenance metadata, and writes structured JSON output."
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.14"
 license = "MIT"
 authors = [
     { name = "Richard Martin" }

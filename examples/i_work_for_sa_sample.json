@@ -1,16 +1,3 @@
-## Optional-field fixture verification
-
-The supplied synthetic fixture containing missing optional fields was parsed successfully.
-
-Verified behaviour:
-
-- missing closing date → `None`
-- missing agency → `None`
-- missing job link → `None`
-- missing anchor element does not cause parsing failure
-
-Result: PASS
-
 {
     "metadata": {
         "source": "i_work_for_sa",

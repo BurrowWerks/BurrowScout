@@ -1,8 +1,10 @@
+from email.utils import unquote
+
 from bs4.element import AttributeValueList, ResultSet, Tag
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import ParseResult, urljoin
-from urllib.parse import urlparse
+from urllib.parse import urlparse, unquote
 import time
 from config import sites, MAX_RESPONSE_SIZE, MIN_REQUEST_INTERVAL, REQUEST_TIMEOUT, USER_AGENT
 
@@ -92,6 +94,9 @@ def validate_url_redirect(response: requests.Response) -> str:
     if not isinstance(base_url_raw, str):
         raise TypeError("Base URL must be a string.")
     make_absolute: str = urljoin(base=base_url_raw, url=location_header)
+    decoded_path = unquote(urlparse(make_absolute).path)
+    if ".." in decoded_path.split("/"):
+        raise ValueError("Path Segment contains '..'")
     prepared_url: str | None = requests.Request(method="GET", url=make_absolute).prepare().url
     if prepared_url is None:
         raise ValueError("Redirect URL could not be prepared.")
