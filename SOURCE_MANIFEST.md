@@ -1,14 +1,14 @@
-**# BurrowScout Source Manifest**
+# BurrowScout Source Manifest
 
-**## Source**
+## Source
 
-****Source name:**** I WORK FOR SA
+**Source name:** I WORK FOR SA
 
-****Source identifier:**** `i_work_for_sa`
+**Source identifier:** `i_work_for_sa`
 
-****Publisher:**** I WORK FOR SA / Government of South Australia
+**Publisher:** I WORK FOR SA / Government of South Australia
 
-****Base URL:****
+**Base URL:**
 
 ```text
 
@@ -16,7 +16,7 @@ https://www.iworkfor.sa.gov.au
 
 ```
 
-****Search URL:****
+**Search URL:**
 
 ```text
 
@@ -24,7 +24,7 @@ https://www.iworkfor.sa.gov.au/jb/page/page.php?pageID=842&windowUID=0
 
 ```
 
-**## Collection Purpose**
+## Collection Purpose
 
 BurrowScout collects publicly presented job and wage information for structured
 
@@ -34,7 +34,7 @@ Version 0.1.0 is limited to demonstrating reliable retrieval, extraction,
 
 validation, provenance tracking, and local structured output from one source.
 
-**## Current Collection Scope**
+## Current Collection Scope
 
 BurrowScout 0.1.0 currently retrieves:
 
@@ -80,7 +80,7 @@ BurrowScout also records:
 
 - record count
 
-**### Salary Field Policy**
+### Salary Field Policy
 
 For BurrowScout 0.1.0, `job_salary` stores the non-empty salary text presented
 
@@ -110,9 +110,9 @@ wage datasets or exports will need to distinguish or exclude undisclosed-pay
 
 records rather than treating them as numerical wage observations.
 
-**## Permission / Access Basis**
+## Permission / Access Basis
 
-****Review date:**** 9 October 2026
+**Review date:** 9 October 2026
 
 The I WORK FOR SA copyright statement says that the Government of South Australia
 
@@ -144,15 +144,15 @@ including IP address, visit time, pages accessed, documents downloaded, referrin
 
 site, and browser type.
 
-**### Source Review Outcome**
+### Source Review Outcome
 
-****Reviewer:**** Richard Martin
+**Reviewer:** Richard Martin
 
-****Original review date:**** 9 October 2026
+**Original review date:** 9 October 2026
 
-****Robots review completed:**** 11 October 2026
+**Robots review completed:** 11 October 2026
 
-****Project review outcome:**** Approved for BurrowScout 0.1.0's current bounded
+**Project review outcome:** Approved for BurrowScout 0.1.0's current bounded
 
 research use.
 
@@ -182,7 +182,7 @@ prohibit automated collection. The website's content licence is treated
 
 separately from permission to access the site automatically.
 
-**### Collection Frequency**
+### Collection Frequency
 
 BurrowScout 0.1.0 is manual-run only. It does not contain scheduling or
 
@@ -198,9 +198,9 @@ Each request within a run is also subject to BurrowScout's configured minimum
 
 request interval.
 
-**### Robots.txt Review**
+### Robots.txt Review
 
-****Review date:**** 11 October 2026
+**Review date:** 11 October 2026
 
 The published `robots.txt` file was reviewed and returned:
 
@@ -226,7 +226,7 @@ scheduling, crawling, pagination, materially higher request volume, or
 
 additional collection paths.
 
-**### Shared Output and Attribution**
+### Shared Output and Attribution
 
 Any publicly shared BurrowScout output derived from I WORK FOR SA should identify
 
@@ -246,7 +246,7 @@ BurrowScout's own source code remains governed separately by the project's MIT
 
 licence.
 
-**### Automated Access**
+### Automated Access
 
 The reviewed Disclaimer, Copyright, and Privacy pages do not expressly grant or
 
@@ -266,7 +266,7 @@ source in a broader public/commercial deployment, the source terms and any
 
 applicable robots.txt directives should be reviewed again.
 
-**## Reviewed Source Policies**
+## Reviewed Source Policies
 
 - Disclaimer:
 
@@ -280,9 +280,9 @@ applicable robots.txt directives should be reviewed again.
 
   `https://www.iworkfor.sa.gov.au/iworkforsa/privacy.php`
 
-**## Request Policy**
+## Request Policy
 
-**### User-Agent**
+### User-Agent
 
 ```text
 
@@ -292,7 +292,7 @@ BurrowScout/0.1.0 (Python; wage-data research)
 
 BurrowScout identifies itself truthfully rather than impersonating a browser.
 
-**### Timeout**
+### Timeout
 
 Connection timeout:
 
@@ -310,7 +310,7 @@ Read timeout:
 
 ```
 
-**### Maximum Response Size**
+### Maximum Response Size
 
 ```text
 
@@ -346,7 +346,7 @@ timeouts, but these are not equivalent to a maximum total run duration.
 
 A hard whole-run runtime budget is deferred to BurrowScout 0.2.0 reliability work.
 
-**### Page Limit**
+### Page Limit
 
 ```text
 
@@ -356,7 +356,7 @@ A hard whole-run runtime budget is deferred to BurrowScout 0.2.0 reliability wor
 
 BurrowScout 0.1.0 does not implement pagination.
 
-**### Redirect Boundary**
+### Redirect Boundary
 
 BurrowScout 0.1.0 follows only redirects required by the documented
 
@@ -404,7 +404,7 @@ A redirect that fails validation is rejected before its destination is
 
 requested. An unexpected additional redirect is not followed.
 
-**## Request Sequence**
+## Request Sequence
 
 The current adapter performs:
 
@@ -432,7 +432,7 @@ GET stable endpoint
 
 → parse
 
-**## Structural Validation**
+## Structural Validation
 
 BurrowScout expects the result table:
 
@@ -458,13 +458,13 @@ Unexpected structure causes the run to fail rather than silently producing
 
 potentially incorrect data.
 
-**## Storage**
+## Storage
 
 Collected data is written locally as UTF-8 JSON.
 
 Raw HTML retention is not part of the normal 0.1.0 collection process.
 
-**## Review Triggers**
+## Review Triggers
 
 This manifest should be reviewed whenever:
 
